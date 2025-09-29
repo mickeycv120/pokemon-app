@@ -38,6 +38,12 @@ testem.log
 /typings
 __screenshots__/
 
+# Angular environment files
+src/environments/*.ts
+
+# Otros archivos sensibles
+.env
+
 # System files
 .DS_Store
 Thumbs.db
