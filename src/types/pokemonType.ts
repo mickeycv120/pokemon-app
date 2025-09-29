@@ -19,9 +19,9 @@ export interface PokemonType {
       url: string;
     }
   ];
-  types: [
+  types: {
     type: {
       name: string;
-    }
-  ];
+    };
+  }[];
 }
