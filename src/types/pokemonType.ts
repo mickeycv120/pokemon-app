@@ -13,6 +13,7 @@ export interface PokemonListResponse {
 export interface PokemonDetails {
   id: number;
   name: string;
+  isFavorite?: boolean;
   sprites: {
     front_default: string;
   };

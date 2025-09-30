@@ -24,13 +24,13 @@ export class App {
   }
 
   pokemonApi = inject(Api);
-  pokemons = toSignal(this.pokemonApi.getPokemons(), { 
-    initialValue: { 
+  pokemons = toSignal(this.pokemonApi.getPokemons(), {
+    initialValue: {
       count: 0,
-      next: null, 
+      next: null,
       previous: null,
-      results: [] 
-    } 
+      results: [],
+    },
   });
   private setThemeByPreference() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
