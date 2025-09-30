@@ -2,18 +2,22 @@
 @import 'tailwindcss';
 
 :root[data-theme='light'] {
-  --text: #040316;
-  --background: #f5f8fa;
-  --primary: #c40e0e;
+  --text: #1a1a2e;
+  --background: #d8dbe4;
+  --primary: #f13b3b;
   --secondary: #023d6e;
-  --accent: #ffcd05;
+  --accent: #e6b800;
+
+  --card-background: #e4e8ed;
 }
 :root[data-theme='dark'] {
   --text: #eae9fc;
   --background: #05080a;
   --primary: #f13b3b;
-  --secondary: #91ccfd;
+  --secondary: #3b4cca;
   --accent: #fac800;
+
+  --card-background: #f5f8fa;
 }
 
 main {

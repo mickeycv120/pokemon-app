@@ -2,7 +2,7 @@
   class="w-[280px] sm:w-[320px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-2xl overflow-hidden flex flex-col"
   appearance="outlined"
 >
-  <div class="relative bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6 flex-shrink-0">
+  <div class="relative p-4 sm:p-6 flex-shrink-0" style="background-color: var(--card-background)">
     <img
       mat-card-image
       class="w-full h-[160px] sm:h-[180px] object-contain drop-shadow-lg"
@@ -18,19 +18,20 @@
       [attr.aria-label]="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
       style="z-index: 20"
     >
-      <mat-icon [class.text-gray-500]="!isFavorite" [class.text-red-500]="isFavorite">
+      <mat-icon [class.text-gray-500]="!isFavorite" [style.color]="isFavorite ? 'var(--accent)' : ''">
         {{ isFavorite ? 'favorite' : 'favorite_border' }}
       </mat-icon>
     </button>
   </div>
 
+  <div class="w-full h-px bg-black/20"></div>
   <div class="px-4 py-3flex flex-col">
-    <mat-card-content class="text-center border-t border-black space-y-1 !mb-0">
+    <mat-card-content class="text-center space-y-1 !mb-0">
       <p class="text-xl text-black sm:text-2xl font-bold capitalize tracking-wide line-clamp-1">
         {{ pokemon?.name }}
       </p>
 
-      <div class="flex flex-wrap justify-center gap-2">
+      <div class="flex flex-wrap justify-center gap-2 mt-2">
         @for (typeInfo of pokemon?.types; track typeInfo.type.name) {
         <span
           class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs sm:text-sm font-semibold px-3 py-1 rounded-full shadow-md transform transition-transform hover:scale-110"
