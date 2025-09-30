@@ -1,23 +1,30 @@
-<mat-card class="example-card" appearance="outlined">
+<mat-card
+  class="w-full max-w-sm mx-auto h-auto shadow-md hover:shadow-lg transition"
+  appearance="outlined"
+>
   <img
     mat-card-image
+    class="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-contain bg-gray-50"
     [src]="pokemon?.sprites?.front_default"
     [alt]="'Photo of ' + (pokemon?.name || 'Unknown')"
   />
-  <div>
-    <mat-card-content class="text-black text-md space-y-1 text-center py-2">
-      <p class="mt-1 mb-2">
+
+  <div class="p-3 sm:p-4">
+    <mat-card-content class="text-black text-sm sm:text-base md:text-lg text-center space-y-2">
+      <p class="font-semibold capitalize tracking-wide">
         {{ pokemon?.name }}
       </p>
+
       <span
-        class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
+        class="inline-block bg-blue-100 text-blue-800 text-xs sm:text-sm md:text-bas<e font-semibold px-3 py-1 rounded-full"
       >
         {{ pokemon?.types?.[0]?.type?.name || 'Unknown' }}
       </span>
     </mat-card-content>
-    <mat-card-actions class="justify-center py-1">
-      <button matButton class="text-sm">LIKE</button>
-      <button matButton class="text-sm">SHARE</button>
+
+    <mat-card-actions class="justify-center mt-3 space-x-2">
+      <button mat-button class="text-xs sm:text-sm md:text-base px-3 sm:px-5 py-1.5">LIKE</button>
+      <button mat-button class="text-xs sm:text-sm md:text-base px-3 sm:px-5 py-1.5">SHARE</button>
     </mat-card-actions>
   </div>
 </mat-card>
