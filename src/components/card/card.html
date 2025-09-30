@@ -1,30 +1,45 @@
 <mat-card
-  class="w-full max-w-sm mx-auto h-auto shadow-md hover:shadow-lg transition"
+  class="w-[280px] sm:w-[320px] h-[480px] sm:h-[520px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-2xl overflow-hidden flex flex-col"
   appearance="outlined"
 >
-  <img
-    mat-card-image
-    class="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-contain bg-gray-50"
-    [src]="pokemon?.sprites?.front_default"
-    [alt]="'Photo of ' + (pokemon?.name || 'Unknown')"
-  />
+  <div class="relative bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6 flex-shrink-0">
+    <img
+      mat-card-image
+      class="w-full h-[180px] sm:h-[200px] object-contain drop-shadow-lg"
+      [src]="pokemon?.sprites?.front_default"
+      [alt]="'Photo of ' + (pokemon?.name || 'Unknown')"
+    />
+  </div>
 
-  <div class="p-3 sm:p-4">
-    <mat-card-content class="text-black text-sm sm:text-base md:text-lg text-center space-y-2">
-      <p class="font-semibold capitalize tracking-wide">
+  <div class="p-4 sm:p-6 bg-white flex flex-col flex-grow">
+    <mat-card-content class="text-center space-y-4 flex-grow">
+      <p class="text-2xl sm:text-3xl font-bold capitalize tracking-wide text-gray-800 line-clamp-1">
         {{ pokemon?.name }}
       </p>
 
-      <span
-        class="inline-block bg-blue-100 text-blue-800 text-xs sm:text-sm md:text-bas<e font-semibold px-3 py-1 rounded-full"
-      >
-        {{ pokemon?.types?.[0]?.type?.name || 'Unknown' }}
-      </span>
+      <div class="flex flex-wrap justify-center gap-2">
+        <span
+          class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm sm:text-base font-semibold px-5 py-2 rounded-full shadow-md transform transition-transform hover:scale-110"
+        >
+          {{ pokemon?.types?.[0]?.type?.name || 'Unknown' }}
+        </span>
+      </div>
     </mat-card-content>
 
-    <mat-card-actions class="justify-center mt-3 space-x-2">
-      <button mat-button class="text-xs sm:text-sm md:text-base px-3 sm:px-5 py-1.5">LIKE</button>
-      <button mat-button class="text-xs sm:text-sm md:text-base px-3 sm:px-5 py-1.5">SHARE</button>
+    <mat-card-actions class="flex justify-center gap-3 mt-auto pb-2 flex-shrink-0">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        class="flex-1 max-w-[130px] text-sm sm:text-base font-semibold py-2"
+      >
+        LIKE
+      </button>
+      <button 
+        mat-raised-button 
+        class="flex-1 max-w-[130px] text-sm sm:text-base font-semibold py-2"
+      >
+        SHARE
+      </button>
     </mat-card-actions>
   </div>
 </mat-card>
