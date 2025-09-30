@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { envirionment } from '../environments/environment.development';
-import { catchError, Observable } from 'rxjs';
-import { PokemonResponse, PokemonResultType } from '../types/pokemonType';
+import { catchError, Observable, map } from 'rxjs';
+import { PokemonListResponse, PokemonDetails } from '../types/pokemonType';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +10,15 @@ import { PokemonResponse, PokemonResultType } from '../types/pokemonType';
 export class Api {
   constructor(private http: HttpClient) {}
 
-  getPokemons(): Observable<PokemonResponse> {
-    return this.http.get<PokemonResponse>(`${envirionment.pokemonUrl}`).pipe(
-      catchError((error) => {
-        if (error.status === 401) {
-          console.error('Not authorized');
-        } else if (error.status === 404) {
-          console.error('Pokémon not found');
-        }
-
+  getPokemons(limit: number = 20, offset: number = 0): Observable<PokemonListResponse> {
+    const params = new URLSearchParams();
+    if (limit) params.set('limit', limit.toString());
+    if (offset) params.set('offset', offset.toString());
+    
+    const url = `${envirionment.pokemonUrl}?${params.toString()}`;
+    
+    return this.http.get<PokemonListResponse>(url).pipe(
+      catchError((error: any) => {
         switch (error.status) {
           case 401:
             console.error('Not authorized');
@@ -37,9 +37,9 @@ export class Api {
     );
   }
 
-  getPokemonById(id: string): Observable<PokemonResponse> {
-    return this.http.get<PokemonResponse>(`${envirionment.pokemonUrl}/${id}`).pipe(
-      catchError((error) => {
+  getPokemonById(id: string): Observable<PokemonDetails> {
+    return this.http.get<PokemonDetails>(`${envirionment.pokemonUrl}/${id}`).pipe(
+      catchError((error: any) => {
         switch (error.status) {
           case 401:
             console.error('Not authorized');

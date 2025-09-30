@@ -6,11 +6,10 @@ import { Header } from '../components/header/header/header';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Board } from '../components/board/board';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, MatFormFieldModule, MatInputModule, Board],
+  imports: [RouterOutlet, Header, MatFormFieldModule, MatInputModule],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -25,7 +24,14 @@ export class App {
   }
 
   pokemonApi = inject(Api);
-  pokemons = toSignal(this.pokemonApi.getPokemons(), { initialValue: { next: '', results: [] } });
+  pokemons = toSignal(this.pokemonApi.getPokemons(), { 
+    initialValue: { 
+      count: 0,
+      next: null, 
+      previous: null,
+      results: [] 
+    } 
+  });
   private setThemeByPreference() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');

@@ -1,27 +1,40 @@
-export interface PokemonResponse {
-  next: string;
-  results: PokemonResultType[];
-}
-
 export interface PokemonResultType {
   name: string;
   url: string;
 }
 
-export interface PokemonType {
+export interface PokemonListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: PokemonResultType[];
+}
+
+export interface PokemonDetails {
+  id: number;
   name: string;
   sprites: {
     front_default: string;
   };
-  abilities: [
-    ability: {
-      name: string;
-      url: string;
-    }
-  ];
   types: {
     type: {
       name: string;
     };
   }[];
+  weight: number;
+  height: number;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+  }[];
+  stats: {
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }[];
 }
+
+export type PokemonResponse = PokemonListResponse | PokemonDetails;

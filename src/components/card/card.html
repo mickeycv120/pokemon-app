@@ -1,45 +1,50 @@
 <mat-card
-  class="w-[280px] sm:w-[320px] h-[480px] sm:h-[520px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-2xl overflow-hidden flex flex-col"
+  class="w-[280px] sm:w-[320px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-2xl overflow-hidden flex flex-col"
   appearance="outlined"
 >
   <div class="relative bg-gradient-to-br from-blue-50 to-purple-50 p-4 sm:p-6 flex-shrink-0">
     <img
       mat-card-image
-      class="w-full h-[180px] sm:h-[200px] object-contain drop-shadow-lg"
+      class="w-full h-[160px] sm:h-[180px] object-contain drop-shadow-lg"
       [src]="pokemon?.sprites?.front_default"
       [alt]="'Photo of ' + (pokemon?.name || 'Unknown')"
     />
+
+    <button
+      mat-icon-button
+      (click)="toggleFavorite()"
+      class="!absolute top-2 right-2 !w-10 !h-10 !bg-white/90 hover:!bg-white shadow-md hover:shadow-lg transition-all"
+      [class.!bg-red-50]="isFavorite"
+      [attr.aria-label]="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
+      style="z-index: 20"
+    >
+      <mat-icon [class.text-gray-500]="!isFavorite" [class.text-red-500]="isFavorite">
+        {{ isFavorite ? 'favorite' : 'favorite_border' }}
+      </mat-icon>
+    </button>
   </div>
 
-  <div class="p-4 sm:p-6 bg-white flex flex-col flex-grow">
-    <mat-card-content class="text-center space-y-4 flex-grow">
-      <p class="text-2xl sm:text-3xl font-bold capitalize tracking-wide text-gray-800 line-clamp-1">
+  <div class="px-4 py-3flex flex-col">
+    <mat-card-content class="text-center border-t border-black space-y-1 !mb-0">
+      <p class="text-xl text-black sm:text-2xl font-bold capitalize tracking-wide line-clamp-1">
         {{ pokemon?.name }}
       </p>
 
       <div class="flex flex-wrap justify-center gap-2">
+        @for (typeInfo of pokemon?.types; track typeInfo.type.name) {
         <span
-          class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm sm:text-base font-semibold px-5 py-2 rounded-full shadow-md transform transition-transform hover:scale-110"
+          class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs sm:text-sm font-semibold px-3 py-1 rounded-full shadow-md transform transition-transform hover:scale-110"
         >
-          {{ pokemon?.types?.[0]?.type?.name || 'Unknown' }}
+          {{ typeInfo.type.name }}
         </span>
+        } @empty {
+        <span
+          class="inline-block bg-gradient-to-r from-gray-400 to-gray-500 text-white text-xs sm:text-sm font-semibold px-3 py-1 rounded-full shadow-md"
+        >
+          Unknown
+        </span>
+        }
       </div>
     </mat-card-content>
-
-    <mat-card-actions class="flex justify-center gap-3 mt-auto pb-2 flex-shrink-0">
-      <button 
-        mat-raised-button 
-        color="primary" 
-        class="flex-1 max-w-[130px] text-sm sm:text-base font-semibold py-2"
-      >
-        LIKE
-      </button>
-      <button 
-        mat-raised-button 
-        class="flex-1 max-w-[130px] text-sm sm:text-base font-semibold py-2"
-      >
-        SHARE
-      </button>
-    </mat-card-actions>
   </div>
 </mat-card>
