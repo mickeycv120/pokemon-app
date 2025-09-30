@@ -2,7 +2,7 @@
   class="w-[280px] sm:w-[320px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 rounded-2xl overflow-hidden flex flex-col"
   appearance="outlined"
 >
-  <div class="relative p-4 sm:p-6 flex-shrink-0" style="background-color: var(--card-background)">
+  <div class="relative p-4 sm:p-6 flex-shrink-0 bg-[var(--card-background)]">
     <img
       mat-card-image
       class="w-full h-[160px] sm:h-[180px] object-contain drop-shadow-lg"
@@ -18,7 +18,10 @@
       [attr.aria-label]="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
       style="z-index: 20"
     >
-      <mat-icon [class.text-gray-500]="!isFavorite" [style.color]="isFavorite ? 'var(--accent)' : ''">
+      <mat-icon
+        [class.text-gray-500]="!isFavorite"
+        [style.color]="isFavorite ? 'var(--accent)' : ''"
+      >
         {{ isFavorite ? 'favorite' : 'favorite_border' }}
       </mat-icon>
     </button>

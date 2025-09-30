@@ -1,25 +1,28 @@
 <div class="min-h-screen flex flex-col">
   <!-- Contenido principal -->
   <div class="flex-grow">
-    <div
-      class="grid grid-cols-1 gap-6 justify-items-center min-[640px]:grid-cols-2 min-[1024px]:grid-cols-3 min-[1400px]:grid-cols-4 p-4"
-    >
+    @if (showOnlyFavorites() && detailedPokemons().length === 0) {
+    <div class="text-center py-12">
+      <p class="text-gray-600 text-lg">No tienes Pokémon favoritos aún. ¡Añade algunos!</p>
+    </div>
+    } @else {
+    <div class="grid grid-cols-1 gap-6 justify-items-center min-[640px]:grid-cols-2 min-[1024px]:grid-cols-3 min-[1400px]:grid-cols-4 p-4">
       @if (isLoading()) {
       <div class="col-span-full text-center py-8">
-        <div
-          class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
-        ></div>
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         <p class="mt-2 text-gray-600">Cargando Pokémon...</p>
       </div>
       } @else if (detailedPokemons().length === 0 && !isLoading()) {
       <div class="col-span-full text-center py-8">
         <p class="text-gray-600">No se encontraron Pokémon.</p>
       </div>
-      } @else { @for (pokemon of detailedPokemons(); track pokemon.id) {
-      <character-card [pokemon]="pokemon" class="block"></character-card>
-      } }
+      } @else { 
+        @for (pokemon of detailedPokemons(); track pokemon.id) {
+          <character-card [pokemon]="pokemon" class="block"></character-card>
+        }
+      }
     </div>
-  </div>
+    }
 
   <!-- Controles de paginación -->
   @if (pokemons().count > 0) {
@@ -35,7 +38,7 @@
     </button>
 
     <div class="flex items-center gap-2">
-      <span class="text-gray-700">Página</span>
+      <span class="!text-gray-700">Página</span>
       <span class="font-medium">{{ currentPage() }}</span>
       <span class="text-gray-500">de</span>
       <span class="font-medium">{{ totalPages() }}</span>

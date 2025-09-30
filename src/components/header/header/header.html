@@ -16,11 +16,12 @@
     </div>
 
     <div>
-      <a
-        routerLink="/favorites"
+      <button
+        (click)="toggleFavoritesView()"
         class="mx-2 text-md text-white cursor-pointer hover:text-[var(--accent)]"
-        >Favorites</a
       >
+        {{ showOnlyFavorites() ? 'Show all' : 'Favorites' }}
+      </button>
     </div>
   </div>
 </header>
